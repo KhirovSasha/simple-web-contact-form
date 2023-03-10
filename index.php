@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,27 +9,29 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
+
 <body>
     <div class="container">
         <h1>Commends</h1>
         <a href="create.php">Add</a>
         <?php
-            require 'config.php';
+        require 'config.php';
 
-            $result = mysqli_query($con, "SELECT * FROM `comments` ORDER BY `id` DESC");
+        $result = mysqli_query($con, "SELECT * FROM `comments`");
 
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "Name: " . $row["name"] . " - Email: " . $row["message"] . "<br>";
-                }
-            } else {
-                echo "No objects found";
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "Name: " . $row["name"] . " - Email: " . $row["message"] . "<a href='update.php?id=" . $row['id'] . "'>Update</a><br>";
             }
-            
-            mysqli_close($con);
+        } else {
+            echo "No objects found";
+        }
+
+        mysqli_close($con);
         ?>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
+
 </html>

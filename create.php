@@ -1,3 +1,21 @@
+<?php
+include "config.php";
+
+if (isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $issue = $_POST['issue'];
+    $message = $_POST['message'];
+
+    if ($email != '') {
+        mysqli_query($con, "INSERT INTO comments(name, email, issue, message) VALUES('" . $name . "','" . $email . "','" . $issue . "','" . $message . "') ");
+        header('location: index.php');
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -17,22 +35,6 @@
 </head>
 
 <body>
-
-    <?php   
-        include "config.php";
-
-        if(isset($_POST['submit'])){
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $issue = $_POST['issue'];
-            $message = $_POST['message'];
-
-            if($email != ''){
-                mysqli_query($con, "INSERT INTO comments(name, email, issue, message) VALUES('".$name."','".$email."','".$issue."','".$message."') ");
-                header('location: index.php');
-            }
-        }
-    ?>
 
     <div class="container">
         <h1>Send comment</h1>
@@ -54,18 +56,18 @@
             <textarea id="summernote" name="message"></textarea>
             <input type="submit" name="submit" value="Submit">
         </form>
-        
+
     </div>
-    
+
 
 
     <script>
-      $('#summernote').summernote({
-        placeholder: 'Hello Bootstrap 4',
-        tabsize: 2,
-        height: 100
-        
-      });
+        $('#summernote').summernote({
+            placeholder: 'Hello Bootstrap 4',
+            tabsize: 2,
+            height: 100
+
+        });
     </script>
 </body>
 
