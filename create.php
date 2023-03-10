@@ -17,9 +17,26 @@
 </head>
 
 <body>
+
+    <?php   
+        include "config.php";
+
+        if(isset($_POST['submit'])){
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $issue = $_POST['issue'];
+            $message = $_POST['message'];
+
+            if($email != ''){
+                mysqli_query($con, "INSERT INTO comments(name, email, issue, message) VALUES('".$name."','".$email."','".$issue."','".$message."') ");
+                header('location: index.php');
+            }
+        }
+    ?>
+
     <div class="container">
         <h1>Send comment</h1>
-        <form>
+        <form method='post'>
             <label for="name">Name</label>
             <input type="text" name="name" require>
 
@@ -34,7 +51,8 @@
                 <option>Other</option>
             </select>
 
-            <div id="summernote"></div>
+            <textarea id="summernote" name="message"></textarea>
+            <input type="submit" name="submit" value="Submit">
         </form>
         
     </div>
