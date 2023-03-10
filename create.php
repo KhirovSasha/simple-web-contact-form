@@ -18,8 +18,25 @@
 
 <body>
     <div class="container">
-        Hello World!
-        <div id="summernote"></div>
+        <h1>Send comment</h1>
+        <form>
+            <label for="name">Name</label>
+            <input type="text" name="name" require>
+
+            <label for="email">Email</label>
+            <input type="email" name="email" require>
+
+            <label for="issue">Issue</label>
+            <select name="issue">
+                <option>Query</option>
+                <option>Feedback</option>
+                <option>Complaint</option>
+                <option>Other</option>
+            </select>
+
+            <div id="summernote"></div>
+        </form>
+        
     </div>
     
 
