@@ -13,25 +13,60 @@
 <body>
     <div class="container">
         <h1>Commends</h1>
-        <a href="create.php">Add</a>
-        <?php
-        require 'config.php';
+        <h6><a href="create.php" class="btn btn-outline-primary">Add Commend</a></h6>
+        <div class="row">
+            <div class="col-12">
+                <div class="mx-auto" style="width: 50%;">
+                    <?php
+                    require 'config.php';
 
-        $result = mysqli_query($con, "SELECT * FROM `comments`");
+                    $result = mysqli_query($con, "SELECT * FROM `comments`");
 
-        if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo "Name: " . $row["name"] . " - Email: " . $row["message"] . "<a href='update.php?id=" . $row['id'] . "'>Update</a><br>";
-            }
-        } else {
-            echo "No objects found";
-        }
+                    if (mysqli_num_rows($result) > 0) {
+                        
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $color;
+                            
+                            switch($row['issue']){
+                                case 'Query':
+                                    $color = 'brown';
+                                    break;
+                                case 'Feedback':
+                                    $color = 'indigo';
+                                    break;
+                                case 'Complaint':
+                                    $color = '#74992e';
+                                    break;
+                                default:
+                                    $color = 'black';
+                            };
 
-        mysqli_close($con);
-        ?>
-    </div>
+                            echo '<div class="toast show mt-3 ">
+                                    <div class="toast-header">
+                                        <div class="me-1" style="width: 1.5em; height: 1.5em; background-color:'.$color.';"></div>
+                                        <strong class="me-auto">'. $row["name"].'</strong>
+                                        <small class="text-muted ms-1 me-2">'.$row['issue'].'</small>
+                                        <small><a class="text-decoration-none text-primary" href="update.php?id='.$row['id'].'">Update</a></small>
+                                        <a type="button" class="btn-close" href="delete.php?id='.$row['id'].'"></a>
+                                    </div>
+                                    <div class="toast-body">
+                                        '.$row['message'].'
+                                    </div>
+                                    </div>';
+                        }
+                    } else {
+                        echo "No objects found";
+                    }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+                    mysqli_close($con);
+                    ?>
+
+
+                    
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 
 </html>
