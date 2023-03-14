@@ -10,12 +10,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 
-<body>
-    <div class="container">
-        <h1>Commends</h1>
-        <h6><a href="create.php" class="btn btn-outline-primary">Add Commend</a></h6>
+<body class="bg-primary">
+    <div class="container pt-4">
+        <h1 class="text-white">Commends</h1>
+        <h6><a href="create.php" class="btn btn-light text-primary">Add Commend</a></h6>
         <div class="row">
-            <div class="col-12">
+            <div class="col-14">
                 <div class="mx-auto" style="width: 50%;">
                     <?php
                     require 'config.php';
@@ -44,7 +44,7 @@
                             echo '<div class="toast show mt-3 ">
                                     <div class="toast-header">
                                         <div class="me-1" style="width: 1.5em; height: 1.5em; background-color:'.$color.';"></div>
-                                        <strong class="me-auto">'. $row["name"].'</strong>
+                                        <strong class="me-auto text-primary">'. $row["name"].'</strong>
                                         <small class="text-muted ms-1 me-2">'.$row['issue'].'</small>
                                         <small><a class="text-decoration-none text-primary" href="update.php?id='.$row['id'].'">Update</a></small>
                                         <a type="button" class="btn-close" href="delete.php?id='.$row['id'].'"></a>
