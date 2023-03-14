@@ -1,5 +1,33 @@
 <?php
 include "config.php";
+$nameErr = $emailErr = $messageErr = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["name"])) {
+        $nameErr = "Name is required";
+    } else {
+        $name = test_input($_POST["name"]);
+        // check if name only contains letters and whitespace
+        if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
+            $nameErr = "Only letters and white space allowed";
+        }
+    }
+
+    if (empty($_POST["email"])) {
+        $emailErr = "Email is required";
+    } else {
+        $email = test_input($_POST["email"]);
+        // check if e-mail address is well-formed
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid email format";
+        }
+    }
+
+    if(empty($_POST["message"])){
+        $messageErr = "Message is required";
+    }
+
+}
 
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
@@ -7,10 +35,18 @@ if (isset($_POST['submit'])) {
     $issue = $_POST['issue'];
     $message = $_POST['message'];
 
-    if ($email != '') {
+    if (!empty($name) && !empty($email) && !empty($message)) {
         mysqli_query($con, "INSERT INTO comments(name, email, issue, message) VALUES('" . $name . "','" . $email . "','" . $issue . "','" . $message . "') ");
         header('location: index.php');
     }
+}
+
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
 ?>
@@ -39,11 +75,15 @@ if (isset($_POST['submit'])) {
     <div class="container">
         <h1>Send comment</h1>
         <form method='post'>
+            <p><span class="error">* required field</span></p>
+
             <label for="name">Name</label>
             <input type="text" name="name" require>
+            <span class="error">* <?php echo $nameErr; ?></span>
 
             <label for="email">Email</label>
             <input type="email" name="email" require>
+            <span class="error">* <?php echo $emailErr;?></span>
 
             <label for="issue">Issue</label>
             <select name="issue">
@@ -53,8 +93,11 @@ if (isset($_POST['submit'])) {
                 <option>Other</option>
             </select>
 
-            <textarea id="summernote" name="message"></textarea>
+            <textarea id="summernote" name="message" require></textarea>
+            <span class="error">* <?php echo $messageErr;?></span>
+
             <input type="submit" name="submit" value="Submit">
+            <a href="/simple-web-contact-form/">Back</a>
         </form>
 
     </div>

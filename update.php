@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
 
         <textarea name="message"><?php echo $message ?></textarea>
         <input type="submit" name="submit" value="Submit">
-
+        <a href="/simple-web-contact-form/">Back</a>
     </form>
 
     <script>
