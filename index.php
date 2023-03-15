@@ -20,7 +20,7 @@
                     <?php
                     require 'config.php';
 
-                    $result = mysqli_query($con, "SELECT * FROM `comments`");
+                    $result = mysqli_query($con, "SELECT * FROM `comments` ORDER BY `id`");
 
                     if (mysqli_num_rows($result) > 0) {
                         
