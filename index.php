@@ -41,7 +41,7 @@
                                     $color = 'black';
                             };
 
-                            echo '<div class="toast show mt-3 ">
+                            echo '<div class="toast show mt-3 mb-4 ">
                                     <div class="toast-header">
                                         <div class="me-1" style="width: 1.5em; height: 1.5em; background-color:'.$color.';"></div>
                                         <strong class="me-auto text-primary">'. $row["name"].'</strong>
