@@ -25,6 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($_POST["message"])) {
         $messageErr = "Message is required";
+    } else {
+        $message = $_POST["message"];
+
+        if (strlen($message) < 10) {
+            $messageErr = "The message must be longer than two characters";
+        }
     }
 }
 
@@ -34,7 +40,7 @@ if (isset($_POST['submit'])) {
     $issue = $_POST['issue'];
     $message = $_POST['message'];
 
-    if (!empty($name) && !empty($email) && !empty($message)) {
+    if (!empty($name) && !empty($email) && !empty($message) && strlen($message) >= 10) {
         mysqli_query($con, "INSERT INTO comments(name, email, issue, message) VALUES('" . $name . "','" . $email . "','" . $issue . "','" . $message . "') ");
         header('location: index.php');
     }
@@ -115,7 +121,7 @@ function test_input($data)
 
     <script>
         $('#summernote').summernote({
-            placeholder: 'Hello Bootstrap 4',
+            placeholder: 'Input your message',
             tabsize: 2,
             height: 100
 
