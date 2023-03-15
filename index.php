@@ -55,7 +55,7 @@
                                     </div>';
                         }
                     } else {
-                        echo "No objects found";
+                        echo "<div class='text-white'>No messages found.</div>";
                     }
 
                     mysqli_close($con);
