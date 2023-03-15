@@ -23,10 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if(empty($_POST["message"])){
+    if (empty($_POST["message"])) {
         $messageErr = "Message is required";
     }
-
 }
 
 if (isset($_POST['submit'])) {
@@ -70,34 +69,44 @@ function test_input($data)
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 </head>
 
-<body>
+<body class="bg-primary">
 
-    <div class="container">
-        <h1>Send comment</h1>
+    <div class="container pt-4">
+        <h1 class="text-white">Send comment</h1>
         <form method='post'>
-            <p><span class="error">* required field</span></p>
+            <p><span class="error text-dark font-weight-bold">* required field</span></p>
 
-            <label for="name">Name</label>
-            <input type="text" name="name" require>
-            <span class="error">* <?php echo $nameErr; ?></span>
+            <div>
+                <label for="name" class="text-white">Name:</label>
+                <span class="error text-dark font-weight-bold">* <?php echo $nameErr; ?></span>
+                <input type="text" name="name" class="form-control" style="width: 10em;" require>
+            </div>
 
-            <label for="email">Email</label>
-            <input type="email" name="email" require>
-            <span class="error">* <?php echo $emailErr;?></span>
+            <div class="pt-3">
+                <label for="email" class="text-white">Email:</label>
+                <span class="error text-dark font-weight-bold">* <?php echo $emailErr; ?></span>
+                <input type="email" name="email" class="form-control" style="width: 10em;" require>
+            </div>
 
-            <label for="issue">Issue</label>
-            <select name="issue">
+            <label for="issue" class="pt-3 text-white">Issue:</label>
+            <select name="issue" class="form-control" style="width: 10em;">
                 <option>Query</option>
                 <option>Feedback</option>
                 <option>Complaint</option>
                 <option>Other</option>
             </select>
 
-            <textarea id="summernote" name="message" require></textarea>
-            <span class="error">* <?php echo $messageErr;?></span>
+            <div class="pt-3">
+                <span for="message" class="text-white">Message:</span>
+                <span class="error text-dark font-weight-bold">* <?php echo $messageErr; ?></span>
+                <textarea id="summernote" name="message" require></textarea>
+            </div>
 
-            <input type="submit" name="submit" value="Submit">
-            <a href="/simple-web-contact-form/">Back</a>
+            <div class="pt-3">
+                <input type="submit" name="submit" class="btn btn-light text-primary" value="Submit">
+                <a href="/simple-web-contact-form/" class="btn btn-light text-primary">Back</a>
+            </div>
+
         </form>
 
     </div>
